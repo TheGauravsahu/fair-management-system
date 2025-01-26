@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
+import { Button } from "./button";
 
 interface NavItem {
   name: string;
@@ -26,7 +27,7 @@ export function NavBar({ items, className }: NavBarProps) {
         className
       )}
     >
-      <div className="flex justify-between items-center gap-2 md:gap-3 bg-background/5 border border-border backdrop-blur-lg py-2 px-4 md:px-8 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center gap-2 md:gap-3 bg-background/5  border border-border backdrop-blur-lg py-2 px-4 md:px-8 rounded-lg shadow-lg">
         <div>
           <h1 className="font-bold text-sm md:text-base">Bazaar Hub</h1>
         </div>
@@ -53,8 +54,9 @@ export function NavBar({ items, className }: NavBarProps) {
           })}
         </nav>
 
-        <div>
+        <div className="flex items-center gap-2">
           <ModeToggle />
+          <Button variant="outline">Login</Button>
         </div>
       </div>
     </div>
