@@ -1,5 +1,6 @@
 import FeaturesSection from "@/components/features-section";
 import HeroSection from "@/components/hero-section";
+import { Footer } from "@/components/ui/footer-section";
 import { NavBar } from "@/components/ui/tubelight-navbar";
 
 export default function Page() {
@@ -19,6 +20,8 @@ export default function Page() {
         <HeroSection />
 
         <FeaturesSection />
+
+        <Footer />
       </div>
     </div>
   );

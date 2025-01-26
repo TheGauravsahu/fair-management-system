@@ -8,7 +8,7 @@ export default function HeroSection() {
   const imageSrc =
     resolvedTheme === "light"
       ? "https://www.launchuicomponents.com/app-light.png"
-      : "";
+      : "https://www.launchuicomponents.com/app-dark.png";
 
   return (
     <div className="h-full w-full  overflow-hidden">
