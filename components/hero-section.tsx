@@ -11,8 +11,8 @@ export default function HeroSection() {
       : "";
 
   return (
-    <div>
-      <div className="mx-auto max-w-2xl md:max-w-4xl py-32 sm:pt-48 lg:pt-56 z-40">
+    <div className="h-full w-full  overflow-hidden">
+      <div className="mx-auto max-w-2xl h-full md:max-w-4xl py-32 sm:pt-48 lg:pt-56 lg:mb-8 z-40">
         <div className="text-center">
           <Badge variant="outline">Learn more ✨</Badge>
           <h1 className="text-3xl md:text-7xl font-bold tracking-tight text-foreground  sm:text-6xl">
@@ -32,16 +32,18 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="w-[90%] md:w-[85%] bg-white dark:bg-black h-full absolute left-1/2 -translate-x-1/2 rounded-lg p-2 overflow-hidden">
-        <div className=" flex flex-col items-center space-y-4 m-4">
-          <div className="absolute left-4 top-4 flex space-x-2">
-            <div className="h-3 w-3 rounded-full bg-red-500"></div>
-            <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-            <div className="h-3 w-3 rounded-full bg-green-500"></div>
+      <div className="h-[30vh] md:h-screen mb-16">
+        <div className="h-fit  w-[90%] md:w-[85%] bg-white dark:bg-black  z-40 absolute left-1/2 -translate-x-1/2 rounded-lg p-2 overflow-hidden">
+          <div className=" flex flex-col items-center space-y-4 m-4">
+            <div className="absolute left-4 top-4 flex space-x-2">
+              <div className="h-3 w-3 rounded-full bg-red-500"></div>
+              <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+              <div className="h-3 w-3 rounded-full bg-green-500"></div>
+            </div>
           </div>
-        </div>
 
-        <img className="rounded-lg" src={imageSrc} alt="" />
+          <img className="rounded-lg object-contain h-full w-full" src={imageSrc} alt="" />
+        </div>
       </div>
     </div>
   );
