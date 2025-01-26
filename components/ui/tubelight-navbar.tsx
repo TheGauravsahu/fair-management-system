@@ -1,25 +1,31 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./button";
 
-interface NavItem {
-  name: string;
-  url: string;
-  icon: LucideIcon;
-}
-
 interface NavBarProps {
-  items: NavItem[];
   className?: string;
 }
 
-export function NavBar({ items, className }: NavBarProps) {
+export function NavBar({ className }: NavBarProps) {
+  const items = [
+    {
+      name: "Home",
+      url: "/",
+    },
+    {
+      name: "Events",
+      url: "/events",
+    },
+    {
+      name: "Vendors",
+      url: "/vendors",
+    },
+    {
+      name: "About",
+      url: "/about",
+    },
+  ];
   return (
     <div
       className={cn(
@@ -34,8 +40,6 @@ export function NavBar({ items, className }: NavBarProps) {
 
         <nav className="flex items-center gap-1">
           {items.map((item) => {
-            const Icon = item.icon;
-
             return (
               <Link
                 key={item.name}
@@ -46,9 +50,6 @@ export function NavBar({ items, className }: NavBarProps) {
                 )}
               >
                 <span className="hidden md:inline">{item.name}</span>
-                <span className="md:hidden">
-                  <Icon size={16} strokeWidth={2.5} />
-                </span>
               </Link>
             );
           })}
