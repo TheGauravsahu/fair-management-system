@@ -2,14 +2,12 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import {
-  CircleUser,
   LayoutDashboard,
   Settings,
   Ticket,
@@ -29,10 +27,8 @@ export default function AdminSidebar() {
   ];
   return (
     <Sidebar>
-      <SidebarHeader className="font-semibold px-4">
-        Bazaar Hub
-      </SidebarHeader>
-      <SidebarContent  className="px-4">
+      <SidebarHeader className="font-semibold px-4">Bazaar Hub</SidebarHeader>
+      <SidebarContent className="px-4">
         <SidebarMenu>
           {sidebarItems.map((item, index) => (
             <SidebarMenuItem key={index}>
