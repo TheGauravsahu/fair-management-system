@@ -2,14 +2,6 @@ import { Card } from "@/components/ui/card";
 import { Users, ShoppingCart, DollarSign, Activity } from "lucide-react";
 
 export default function Admin() {
-  const data = [
-    { name: "Jan", total: 1200 },
-    { name: "Feb", total: 2100 },
-    { name: "Mar", total: 1800 },
-    { name: "Apr", total: 2400 },
-    { name: "May", total: 2700 },
-  ];
-
   return (
     <main className="flex-1 p-8 space-y-6">
       <h1 className="text-3xl font-bold">Dashboard</h1>
