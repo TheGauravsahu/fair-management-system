@@ -13,8 +13,10 @@ export async function POST(req: Request) {
     const values: IValues = await req.json();
 
     // Check if the user already exists
-    const user = await prisma.user.findUnique({
-      where: { email: values.email },
+    const user = await prisma.user.findFirst({
+      where: {
+        email: values.email,
+      },
     });
 
     if (user) {

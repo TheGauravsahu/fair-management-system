@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -8,6 +9,9 @@ import {
 } from "@/components/ui/sidebar";
 import { Home, Calendar, Store, Info } from "lucide-react";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { auth } from "@/auth";
+import Logout from "./logout";
 
 const sidebarItems = [
   { icon: Home, label: "Home", href: "/" },
@@ -16,7 +20,9 @@ const sidebarItems = [
   { icon: Info, label: "About", href: "/about" },
 ];
 
-export default function AppSidebar() {
+export default async function AppSidebar() {
+  const session = await auth();
+
   return (
     <div className="hidden">
       <Sidebar side="right">
@@ -35,6 +41,15 @@ export default function AppSidebar() {
             ))}
           </SidebarMenu>
         </SidebarContent>
+        <SidebarFooter>
+          {session ? (
+            <Logout />
+          ) : (
+            <Button>
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
+        </SidebarFooter>
       </Sidebar>
     </div>
   );

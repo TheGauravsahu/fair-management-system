@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInWithCredentials } from "@/actions/login.action";
+import { useRouter } from "next/navigation";
 
 export const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -21,6 +22,8 @@ export const loginFormSchema = z.object({
 });
 
 export function LoginForm() {
+  const router = useRouter();
+
   type LoginFormValues = z.infer<typeof loginFormSchema>;
 
   const form = useForm<LoginFormValues>({
@@ -35,6 +38,7 @@ export function LoginForm() {
     try {
       const res = await signInWithCredentials(values);
       console.log("--response--", res);
+      router.push("/");
     } catch (error) {
       console.log("Error loggin in", error);
     }
