@@ -6,13 +6,16 @@ import { revalidatePath } from "next/cache";
 export default function Logout() {
   const LogoutUser = async () => {
     "use server";
+
     try {
       await signOut({
-        redirect: false,
+        redirectTo: "/login",
       });
+
       revalidatePath("/");
     } catch (error) {
       console.log(error);
+
       return { success: false, message: error };
     }
   };

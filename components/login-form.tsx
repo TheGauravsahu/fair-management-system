@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { signInWithCredentials } from "@/actions/login.action";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -23,6 +25,7 @@ export const loginFormSchema = z.object({
 
 export function LoginForm() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   type LoginFormValues = z.infer<typeof loginFormSchema>;
 
@@ -36,10 +39,27 @@ export function LoginForm() {
 
   async function handleSubmit(values: LoginFormValues) {
     try {
+      setLoading(true);
       const res = await signInWithCredentials(values);
       console.log("--response--", res);
-      router.push("/");
+
+      form.reset();
+
+      if (res.success) {
+        setLoading(false);
+        toast("Login successful");
+        router.push("/");
+      }
+      if (!res.success) {
+        setLoading(false);
+        toast.error("Invalid credentials.");
+      }
+
+      setLoading(false);
+      toast.error("Login successful.");
     } catch (error) {
+      setLoading(false);
+      toast.error("Invalid credentials.");
       console.log("Error loggin in", error);
     }
   }
@@ -80,7 +100,15 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button>Submit</Button>
+        <Button disabled={loading}>
+          {loading ? (
+            <span className="flex items-center justify-center gap-1">
+              <Loader2 className="animate-spin" /> Logging In
+            </span>
+          ) : (
+            <span>Login</span>
+          )}
+        </Button>
       </form>
     </Form>
   );
