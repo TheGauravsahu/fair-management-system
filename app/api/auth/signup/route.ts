@@ -39,8 +39,8 @@ export async function POST(req: Request) {
         status: 201,
       }
     );
-  } catch (error: any) {
-    console.log("---/api/auth/signup error---", error.message);
+  } catch (error) {
+    console.log("---/api/auth/signup error---", error);
     return Response.json(
       { message: "Internal Server Error", error: error },
       {
