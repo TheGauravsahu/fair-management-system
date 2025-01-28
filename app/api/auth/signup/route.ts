@@ -2,9 +2,15 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
+interface IValues {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export async function POST(req: Request) {
   try {
-    const values = await req.json();
+    const values: IValues = await req.json();
 
     // Check if the user already exists
     const user = await prisma.user.findUnique({
