@@ -31,7 +31,6 @@ export async function POST(req: Request) {
     });
 
     const { password, ...userWithoutPassword } = newUser;
-    
 
     return Response.json(
       { message: "User created", user: userWithoutPassword },
