@@ -18,22 +18,24 @@ const sidebarItems = [
 
 export default function AppSidebar() {
   return (
-    <Sidebar side="right" className="md:hidden">
-      <SidebarHeader className="font-semibold px-4">Bazaar Hub</SidebarHeader>
-      <SidebarContent className="px-4">
-        <SidebarMenu>
-          {sidebarItems.map((item, index) => (
-            <SidebarMenuItem key={index}>
-              <SidebarMenuButton asChild>
-                <Link href={item.href}>
-                  <item.icon />
-                  <span>{item.label}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarContent>
-    </Sidebar>
+    <div className="hidden">
+      <Sidebar side="right">
+        <SidebarHeader className="font-semibold px-4">Bazaar Hub</SidebarHeader>
+        <SidebarContent className="px-4">
+          <SidebarMenu>
+            {sidebarItems.map((item, index) => (
+              <SidebarMenuItem key={index}>
+                <SidebarMenuButton asChild>
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarContent>
+      </Sidebar>
+    </div>
   );
 }
