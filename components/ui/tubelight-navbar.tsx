@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./button";
 import { auth } from "@/auth";
+import { SidebarTrigger } from "./sidebar";
 
 interface NavBarProps {
   className?: string;
@@ -59,13 +60,21 @@ export async function NavBar({ className }: NavBarProps) {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <ModeToggle />
 
           {session ? (
-            <Button variant="outline">
-              <Link href="/profile">Profile</Link>
-            </Button>
+            <div className="flex items-center">
+              <Button variant="outline"  className="hidden md:block">
+                <Link href="/profile">
+                  Profile
+                </Link>
+              </Button>
+              <button  className="block md:hidden">
+           
+                <SidebarTrigger />
+              </button>
+            </div>
           ) : (
             <Button variant="outline">
               <Link href="/login">Login</Link>
