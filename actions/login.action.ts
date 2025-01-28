@@ -7,7 +7,7 @@ export const signInWithCredentials = async (credentials: {
   password: string;
 }) => {
   try {
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       redirect: false,
       ...credentials,
     });

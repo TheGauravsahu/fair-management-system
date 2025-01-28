@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
 
     const { password, ...userWithoutPassword } = newUser;
     
+
     return Response.json(
       { message: "User created", user: userWithoutPassword },
       {

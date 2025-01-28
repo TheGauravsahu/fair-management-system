@@ -24,7 +24,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="h-[70vh] w-full  p-8 mt-16">
+    <section className="h-screen mb-32 md:mb-0 md:h-[70vh] w-full  p-8 mt-16">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
         Powerful
         <span className="animate-text-gradient  bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text text-transparent dark:from-neutral-100 dark:via-slate-400 dark:to-neutral-400">

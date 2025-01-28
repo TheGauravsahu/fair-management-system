@@ -46,7 +46,7 @@ export function SignupForm() {
 
       form.reset();
       router.push("/");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error signing up:", error);
     }
   }
