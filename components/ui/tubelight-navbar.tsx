@@ -2,12 +2,13 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./button";
+import { auth } from "@/auth";
 
 interface NavBarProps {
   className?: string;
 }
 
-export function NavBar({ className }: NavBarProps) {
+export async function NavBar({ className }: NavBarProps) {
   const items = [
     {
       name: "Home",
@@ -26,6 +27,9 @@ export function NavBar({ className }: NavBarProps) {
       url: "/about",
     },
   ];
+
+  const session = await auth();
+
   return (
     <div
       className={cn(
@@ -34,9 +38,9 @@ export function NavBar({ className }: NavBarProps) {
       )}
     >
       <div className="flex justify-between items-center gap-2 md:gap-3 bg-background/5  border border-border backdrop-blur-lg py-2 px-4 md:px-8 rounded-lg shadow-lg">
-        <div>
+        <Link href="/">
           <h1 className="font-bold text-sm md:text-base">Bazaar Hub</h1>
-        </div>
+        </Link>
 
         <nav className="flex items-center gap-1">
           {items.map((item) => {
@@ -57,7 +61,16 @@ export function NavBar({ className }: NavBarProps) {
 
         <div className="flex items-center gap-2">
           <ModeToggle />
-          <Button variant="outline">Login</Button>
+
+          {session ? (
+            <Button variant="outline">
+              <Link href="/profile">Profile</Link>
+            </Button>
+          ) : (
+            <Button variant="outline">
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>
