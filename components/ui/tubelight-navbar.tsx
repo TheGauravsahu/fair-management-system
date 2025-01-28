@@ -35,7 +35,7 @@ export async function NavBar({ className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed top-0 left-1/2 -translate-x-1/2 z-50 mb-6 pt-6 w-[95%] md:w-[60%]",
+        "fixed top-0 left-1/2 -translate-x-1/2 z-50 mb-6 pt-6 w-[95%] lg:w-[60%] md:w-[80%]",
         className
       )}
     >

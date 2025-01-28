@@ -47,16 +47,13 @@ export function LoginForm() {
 
       if (res.success) {
         setLoading(false);
-        toast("Login successful");
+        toast.success("Login successful");
         router.push("/");
       }
       if (!res.success) {
         setLoading(false);
         toast.error("Invalid credentials.");
       }
-
-      setLoading(false);
-      toast.error("Login successful.");
     } catch (error) {
       setLoading(false);
       toast.error("Invalid credentials.");

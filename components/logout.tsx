@@ -1,22 +1,26 @@
-import { signOut } from "@/auth";
+"use client";
+import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 export default function Logout() {
-  const LogoutUser = async () => {
-    "use server";
+  const router = useRouter();
 
+  const LogoutUser = async () => {
     try {
-      await signOut({
-        redirectTo: "/login",
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
       });
 
-      revalidatePath("/");
-    } catch (error) {
-      console.log(error);
+      console.log(res);
 
-      return { success: false, message: error };
+      if (res.ok) {
+        toast.success("Logged out successfully.");
+        router.push("/login");
+      }
+    } catch (error) {
+      toast.error(`Failed to logout ${error}`);
     }
   };
 
