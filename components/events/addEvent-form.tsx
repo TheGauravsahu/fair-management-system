@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -15,6 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { createEvent } from "@/actions/event.actions";
+import { useState } from "react";
+import LoadingButton from "../ui/loading-button";
 
 const addEventFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -26,9 +28,11 @@ const addEventFormSchema = z.object({
   status: z.enum(["active", "inactive"]).default("active"),
 });
 
+export type AddEventFormValues = z.infer<typeof addEventFormSchema>;
+
 function AddEventForm() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  type AddEventFormValues = z.infer<typeof addEventFormSchema>;
 
   const addEventForm = useForm<AddEventFormValues>({
     resolver: zodResolver(addEventFormSchema),
@@ -45,24 +49,17 @@ function AddEventForm() {
 
   async function handleSubmit(values: AddEventFormValues) {
     try {
+      setLoading(true);
       // create event
-      const response = await fetch("/api/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        toast.error("Failed to create event");
-      }
+      await createEvent(values);
 
       // Reset form after successful submission
       addEventForm.reset();
       toast.success("Event created successfully.");
+      setLoading(false);
       router.push("/admin/events");
     } catch (error) {
+      setLoading(false);
       console.error("Error creating event:", error);
       toast.error("Error creating event");
     }
@@ -200,7 +197,11 @@ function AddEventForm() {
           )}
         />
 
-        <Button type="submit">Add Event</Button>
+        <LoadingButton
+          loading={loading}
+          text="Add event"
+          loadingText="Adding event"
+        />
       </form>
     </Form>
   );
