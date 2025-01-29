@@ -16,6 +16,7 @@ import { signInWithCredentials } from "@/actions/login.action";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import LoadingButton from "./ui/loading-button";
+import Link from "next/link";
 
 export const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -40,7 +41,7 @@ export function LoginForm() {
     try {
       setLoading(true);
       const res = await signInWithCredentials(values);
-      console.log("--response--", res);
+      // console.log("--response--", res);
 
       form.reset();
 
@@ -101,6 +102,15 @@ export function LoginForm() {
           text="Login"
           loadingText="Logging In"
         />
+
+        <div className="text-center">
+          <p>
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="text-blue-500 hover:underline">
+              Signup here
+            </Link>
+          </p>
+        </div>
       </form>
     </Form>
   );

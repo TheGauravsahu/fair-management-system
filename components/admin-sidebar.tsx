@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-
 export default function AdminSidebar() {
   const sidebarItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
@@ -27,6 +26,7 @@ export default function AdminSidebar() {
     { icon: Calendar, label: "Events", href: "/admin/events" },
     { icon: Settings, label: "Settings", href: "/admin/settings" },
   ];
+
   return (
     <Sidebar>
       <SidebarHeader className="font-semibold px-4">Bazaar Hub</SidebarHeader>

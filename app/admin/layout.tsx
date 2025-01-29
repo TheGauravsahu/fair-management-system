@@ -1,8 +1,10 @@
+import { auth } from "@/auth";
 import AdminSidebar from "@/components/admin-sidebar";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AdminNavbar from "@/components/ui/admin-navbar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Metadata } from "next";
 import React from "react";
+import { redirect } from "next/navigation";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -13,20 +15,20 @@ export const metadata: Metadata = {
   description: "Fair management platform.",
 };
 
+export default async function AdminLayout({ children }: AdminLayoutProps) {
+  const session = await auth();
 
-export default function AdminLayout({ children }: AdminLayoutProps) {
+  console.log(session)
+
+  if (!session || session.user?.role != "admin") {
+    redirect("/login");
+  }
   return (
     <div className="w-full">
       <SidebarProvider>
         <AdminSidebar />
         <div className="p-4 w-full">
-          <nav className="flex items-center justify-between border-b pb-2">
-            <SidebarTrigger />
-            <div className="flex items-center gap-1">
-              <span>Welcome, Gaurav</span>
-              <ModeToggle />
-            </div>
-          </nav>
+          <AdminNavbar />
           {children}
         </div>
       </SidebarProvider>

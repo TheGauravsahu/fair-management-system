@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import LoadingButton from "./ui/loading-button";
 import { useState } from "react";
+import Link from "next/link";
 
 const signupFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -112,6 +113,14 @@ export function SignupForm() {
           text="Signup"
           loadingText="Sigining Up"
         />
+        <div className="text-center">
+          <p>
+            Already have an account?{" "}
+            <Link href="/login" className="text-blue-500 hover:underline">
+              Login here
+            </Link>
+          </p>
+        </div>
       </form>
     </Form>
   );

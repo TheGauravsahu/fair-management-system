@@ -1,7 +1,19 @@
-import NextAuth from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "./lib/prisma";
 import bcrypt from "bcryptjs";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      role: string;
+    } & DefaultSession["user"];
+  }
+
+  interface User {
+    role: string;
+  }
+}
 
 export const { signIn, signOut, auth, handlers } = NextAuth({
   providers: [
@@ -44,6 +56,22 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
         }
       },
     }),
-  ]
-
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role; // Ensure role is set in token
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.role = (token.role as string) ?? "user"; // Default to "user" if role is undefined
+      }
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
 });

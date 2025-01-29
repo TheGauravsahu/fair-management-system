@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/lib/prisma";
 import { Event } from "@prisma/client";
 
