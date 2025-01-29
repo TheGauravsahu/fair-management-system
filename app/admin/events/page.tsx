@@ -36,17 +36,19 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
         <SearchEvents />
       </div>
 
-      <div className="mb-4 mt-8">
+      <div className="mb-8 mt-8">
         <Button>
           <Link href="/admin/events/add">Add event</Link>
         </Button>
       </div>
 
-      <div className="w-full h-full flex items-center justify-center lg:justify-normal gap-4 flex-wrap">
+      <h1 className="text-2xl font-bold mb-4">Events</h1>
+
+      <div className="w-full h-full flex items-center justify-center lg:justify-normal gap-4 flex-wrap mt-4">
         {filteredEvents.map((event) => (
           <Card
             key={event.id}
-            className="hover:scale-105 cursor-pointer transition-all duration-300 ease-in-out w-[21rem] h-72 hover:shadow-lg"
+            className="hover:scale-105 cursor-pointer transition-all duration-300 ease-in-out w-[21rem] h-80 lg:h-72 hover:shadow-lg"
           >
             <CardHeader className="pb-2">
               <CardTitle className="text-lg hover:text-primary transition-colors">
@@ -74,7 +76,7 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
                 Created: {formatDate(event.createdAt)}
               </p>
             </CardContent>
-            <CardFooter className="flex justify-end gap-2">
+            <CardFooter className="flex items-center mt-2 gap-2">
               <Button variant="outline" size="sm">
                 <Link href={`/admin/events/${event.id}/edit`}>Edit</Link>
               </Button>
