@@ -218,8 +218,8 @@ export default function EditEventForm({
 
         <LoadingButton
           loading={loading}
-          text="Update event"
-          loadingText="Updating event"
+          text="Save Changes"
+          loadingText="Saving"
         />
       </form>
     </Form>
