@@ -32,11 +32,11 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
 
   return (
     <div className="p-8">
-      <div className="w-full flex items-center justify-center mb-4">
+      <div className="w-full flex items-center justify-center mb-8">
         <SearchEvents />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 mt-8">
         <Button>
           <Link href="/admin/events/add">Add event</Link>
         </Button>
