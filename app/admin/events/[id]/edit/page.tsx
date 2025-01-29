@@ -4,11 +4,11 @@ import { getEventDetails } from "@/data/event.data";
 import React from "react";
 
 interface AminEditEventProps {
-  params: { id: string };
+  params: { id: Promise<string> };
 }
 
 export default async function AdminEditEvent({ params }: AminEditEventProps) {
-  const { id } = await params;
+  const id = await params.id;
 
   const event = await getEventDetails(id);
 
