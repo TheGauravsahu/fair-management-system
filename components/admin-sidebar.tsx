@@ -20,7 +20,7 @@ import Link from "next/link";
 export default function AdminSidebar() {
   const sidebarItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
-    { icon: Users, label: "Exhibitors", href: "/admin/exhibitors" },
+    { icon: Users, label: "Users", href: "/admin/users" },
     { icon: Store, label: "Stalls", href: "/admin/stalls" },
     { icon: Ticket, label: "Tickets", href: "/admin/tickets" },
     { icon: Calendar, label: "Events", href: "/admin/events" },
@@ -29,7 +29,9 @@ export default function AdminSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="font-semibold px-4">Bazaar Hub</SidebarHeader>
+      <SidebarHeader className="font-semibold px-4">
+        <Link href="/">Bazaar Hub.</Link>
+      </SidebarHeader>
       <SidebarContent className="px-4">
         <SidebarMenu>
           {sidebarItems.map((item, index) => (

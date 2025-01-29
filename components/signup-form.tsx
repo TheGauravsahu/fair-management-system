@@ -50,7 +50,7 @@ export function SignupForm() {
 
       form.reset();
       setLoading(false);
-      router.push("/");
+      router.push("/login");
     } catch (error) {
       setLoading(false);
       console.error("Error signing up:", error);
