@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import DeleteUser from "@/components/delete-user";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function AdminUsers() {
   const users = await listAllUsers();
@@ -39,8 +41,11 @@ export default async function AdminUsers() {
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>
-              <TableCell>
+              <TableCell className="flex items-center gap-1">
                 <DeleteUser id={user.id} />
+                <Button className="ml-1 gap-1" variant="outline">
+                  <Link href={`/admin/users/${user.id}/edit`}>Edit</Link>
+                </Button>
               </TableCell>
             </TableRow>
           ))}

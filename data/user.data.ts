@@ -12,3 +12,15 @@ export const listAllUsers = async (): Promise<User[]> => {
     throw error;
   }
 };
+
+export const getUserDetails = async (id: string): Promise<User> => {
+  try {
+    const user = await prisma.user.findFirstOrThrow({
+      where: { id },
+    });
+    return user;
+  } catch (error) {
+    console.log("Error getting user details.", error);
+    throw error;
+  }
+};
