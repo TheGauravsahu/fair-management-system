@@ -1,11 +1,18 @@
 import AdminSidebar from "@/components/admin-sidebar";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Metadata } from "next";
 import React from "react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Admin - Bazaar Hub",
+  description: "Fair management platform.",
+};
+
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (

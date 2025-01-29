@@ -15,3 +15,16 @@ model User {
   role      String   @default("user")
   createdAt DateTime @default(now())
 }
+
+model Event {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  location    String
+  price       Float
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
