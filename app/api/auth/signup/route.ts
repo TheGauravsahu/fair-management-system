@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 interface IValues {
   name: string;
@@ -39,6 +40,8 @@ export async function POST(req: Request) {
     });
 
     const { password, ...userWithoutPassword } = newUser;
+
+    revalidatePath("/admin/users");
 
     return Response.json(
       { message: "User created", user: userWithoutPassword },

@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import DeleteUser from "@/components/delete-user";
 
 export default async function AdminUsers() {
   const users = await listAllUsers();
@@ -28,6 +29,7 @@ export default async function AdminUsers() {
             <TableHead className="w-[100px]">name</TableHead>
             <TableHead>email</TableHead>
             <TableHead>role</TableHead>
+            <TableHead>actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -37,6 +39,9 @@ export default async function AdminUsers() {
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>
+              <TableCell>
+                <DeleteUser id={user.id} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
