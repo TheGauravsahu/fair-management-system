@@ -1,4 +1,5 @@
 import DeleteEvent from "@/components/events/deleteEvent";
+import SearchEvents from "@/components/events/searchEvents";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,14 +11,31 @@ import {
 } from "@/components/ui/card";
 import { listAllEvents } from "@/data/event.data";
 import { formatDate } from "@/lib/utils";
+import { Event } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 
-export default async function AdminEvents() {
+interface AdminEventsProps {
+  searchParams: { search?: string };
+}
+
+export default async function AdminEvents({ searchParams }: AdminEventsProps) {
   const events = await listAllEvents();
+  const { search } = await searchParams;
+
+  let filteredEvents: Event[] = events;
+  if (search) {
+    filteredEvents = events.filter((event) =>
+      event.name.toLowerCase().includes(search)
+    );
+  }
 
   return (
     <div className="p-8">
+      <div className="w-full flex items-center justify-center mb-4">
+        <SearchEvents />
+      </div>
+
       <div className="mb-4">
         <Button>
           <Link href="/admin/events/add">Add event</Link>
@@ -25,7 +43,7 @@ export default async function AdminEvents() {
       </div>
 
       <div className="w-full h-full flex items-center justify-center lg:justify-normal gap-4 flex-wrap">
-        {events.map((event) => (
+        {filteredEvents.map((event) => (
           <Card
             key={event.id}
             className="hover:scale-105 cursor-pointer transition-all duration-300 ease-in-out w-[21rem] h-72 hover:shadow-lg"
