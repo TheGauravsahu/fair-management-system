@@ -18,7 +18,7 @@ export default async function AdminEditEvent({ params }: AminEditEventProps) {
 
       <Card className="md:max-w-3xl my-4 md:p-4 py-2">
         <CardContent>
-          <EditEventForm event={event} />
+          <EditEventForm event={event} id={id} />
         </CardContent>
       </Card>
     </div>

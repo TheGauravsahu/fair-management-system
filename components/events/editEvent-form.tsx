@@ -14,10 +14,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createEvent } from "@/actions/event.actions";
 import { useEffect, useState } from "react";
 import LoadingButton from "../ui/loading-button";
 import { Event } from "@prisma/client";
+import { updateEvent } from "@/actions/event.actions";
 
 const updateEventFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -31,7 +31,13 @@ const updateEventFormSchema = z.object({
 
 export type UpdateEventFormValues = z.infer<typeof updateEventFormSchema>;
 
-export default function EditEventForm({ event }: { event: Event }) {
+export default function EditEventForm({
+  event,
+  id,
+}: {
+  event: Event;
+  id: string;
+}) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -52,7 +58,7 @@ export default function EditEventForm({ event }: { event: Event }) {
     try {
       setLoading(true);
       // create event
-      await createEvent(values);
+      await updateEvent(values, id);
 
       // Reset form after successful submission
       updateEventForm.reset();
@@ -76,7 +82,7 @@ export default function EditEventForm({ event }: { event: Event }) {
       price: event.price,
       status: event.status as "active" | "inactive",
     });
-  });
+  }, [event, updateEventForm]);
 
   return (
     <Form {...updateEventForm}>
@@ -212,8 +218,8 @@ export default function EditEventForm({ event }: { event: Event }) {
 
         <LoadingButton
           loading={loading}
-          text="Add event"
-          loadingText="Adding event"
+          text="Update event"
+          loadingText="Updating event"
         />
       </form>
     </Form>

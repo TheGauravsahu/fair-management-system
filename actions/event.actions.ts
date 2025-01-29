@@ -19,3 +19,20 @@ export const createEvent = async (
     throw error;
   }
 };
+
+export const updateEvent = async (
+  values: AddEventFormValues,
+  id: string
+): Promise<Event> => {
+  try {
+    const event = await prisma.event.update({
+      where: { id },
+      data: values,
+    });
+    revalidatePath("/admin/events");
+    return event;
+  } catch (error) {
+    console.log("Error updating event.", error);
+    throw error;
+  }
+};
