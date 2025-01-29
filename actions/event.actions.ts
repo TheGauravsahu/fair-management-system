@@ -36,3 +36,17 @@ export const updateEvent = async (
     throw error;
   }
 };
+
+export const deleteEvent = async (id: string) => {
+  try {
+    await prisma.event.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/admin/events");
+  } catch (error) {
+    console.log("Error deleting event.", error);
+    throw error;
+  }
+};

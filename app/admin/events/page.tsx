@@ -1,3 +1,4 @@
+import DeleteEvent from "@/components/events/deleteEvent";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,7 +28,7 @@ export default async function AdminEvents() {
         {events.map((event) => (
           <Card
             key={event.id}
-            className="hover:scale-105 cursor-pointer transition-all duration-300 ease-in-out w-[20rem] h-72 hover:shadow-lg"
+            className="hover:scale-105 cursor-pointer transition-all duration-300 ease-in-out w-[21rem] h-72 hover:shadow-lg"
           >
             <CardHeader className="pb-2">
               <CardTitle className="text-lg hover:text-primary transition-colors">
@@ -59,9 +60,7 @@ export default async function AdminEvents() {
               <Button variant="outline" size="sm">
                 <Link href={`/admin/events/${event.id}/edit`}>Edit</Link>
               </Button>
-              <Button variant="destructive" size="sm">
-                Delete
-              </Button>
+              <DeleteEvent id={event.id} />
             </CardFooter>
           </Card>
         ))}
