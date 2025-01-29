@@ -16,7 +16,7 @@ import Link from "next/link";
 import React from "react";
 
 interface AdminEventsProps {
-  searchParams: { search?: string };
+  searchParams: Promise<{ search?: string }>;
 }
 
 export default async function AdminEvents({ searchParams }: AdminEventsProps) {
