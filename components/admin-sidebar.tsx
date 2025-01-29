@@ -15,6 +15,8 @@ import {
   Calendar,
   Store,
 } from "lucide-react";
+import Link from "next/link";
+
 
 export default function AdminSidebar() {
   const sidebarItems = [
@@ -33,10 +35,10 @@ export default function AdminSidebar() {
           {sidebarItems.map((item, index) => (
             <SidebarMenuItem key={index}>
               <SidebarMenuButton asChild>
-                <a href={item.href}>
+                <Link href={item.href}>
                   <item.icon />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
