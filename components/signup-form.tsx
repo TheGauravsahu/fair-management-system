@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import LoadingButton from "./ui/loading-button";
+import { useState } from "react";
 
 const signupFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -21,6 +22,7 @@ const signupFormSchema = z.object({
 });
 
 export function SignupForm() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   type SignupFormValues = z.infer<typeof signupFormSchema>;
@@ -36,6 +38,7 @@ export function SignupForm() {
 
   async function handleSubmit(values: SignupFormValues) {
     try {
+      setLoading(true);
       await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -45,8 +48,10 @@ export function SignupForm() {
       });
 
       form.reset();
+      setLoading(false);
       router.push("/");
     } catch (error) {
+      setLoading(false);
       console.error("Error signing up:", error);
     }
   }
@@ -102,7 +107,11 @@ export function SignupForm() {
             </FormItem>
           )}
         />
-        <Button>Submit</Button>
+        <LoadingButton
+          loading={loading}
+          text="Signup"
+          loadingText="Sigining Up"
+        />
       </form>
     </Form>
   );

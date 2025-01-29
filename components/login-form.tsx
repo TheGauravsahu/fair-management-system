@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { signInWithCredentials } from "@/actions/login.action";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import LoadingButton from "./ui/loading-button";
 
 export const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -97,15 +96,11 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button disabled={loading}>
-          {loading ? (
-            <span className="flex items-center justify-center gap-1">
-              <Loader2 className="animate-spin" /> Logging In
-            </span>
-          ) : (
-            <span>Login</span>
-          )}
-        </Button>
+        <LoadingButton
+          loading={loading}
+          text="Login"
+          loadingText="Logging In"
+        />
       </form>
     </Form>
   );
