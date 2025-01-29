@@ -6,7 +6,6 @@ import { auth } from "@/auth";
 export default async function AdminNavbar() {
   const session = await auth();
 
-  console.log(session)
   return (
     <nav className="flex items-center justify-between border-b pb-2">
       <SidebarTrigger />
