@@ -5,6 +5,7 @@ import { Button } from "./button";
 import { auth } from "@/auth";
 import { SidebarTrigger } from "./sidebar";
 import Logout from "../logout";
+import { Badge } from "./badge";
 
 interface NavBarProps {
   className?: string;
@@ -40,8 +41,9 @@ export async function NavBar({ className }: NavBarProps) {
       )}
     >
       <div className="flex justify-between items-center gap-2 md:gap-3 bg-background/5  border border-border backdrop-blur-lg py-2 px-4 md:px-8 rounded-lg shadow-lg">
-        <Link href="/">
-          <h1 className="font-bold text-sm md:text-base">Bazaar Hub</h1>
+        <Link href="/" className="flex items-end gap-1">
+          <h1 className="font-bold text-lg md:text-base">Bazaar Hub</h1>
+          <Badge className="text-xs">dev</Badge>
         </Link>
 
         <nav className="flex items-center gap-1">

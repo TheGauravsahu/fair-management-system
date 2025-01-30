@@ -16,6 +16,7 @@ import {
   Store,
 } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "./ui/badge";
 
 export default function AdminSidebar() {
   const sidebarItems = [
@@ -30,7 +31,10 @@ export default function AdminSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="font-semibold px-4">
-        <Link href="/">Bazaar Hub.</Link>
+        <Link href="/" className="flex items-end gap-1">
+          <h1 className="font-bold text-lg md:text-base">Bazaar Hub</h1>
+          <Badge className="text-xs">dev</Badge>
+        </Link>
       </SidebarHeader>
       <SidebarContent className="px-4">
         <SidebarMenu>
