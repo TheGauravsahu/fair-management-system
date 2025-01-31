@@ -81,6 +81,9 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
                 <Link href={`/admin/events/${event.id}/edit`}>Edit</Link>
               </Button>
               <DeleteEvent id={event.id} />
+              <Button variant="outline" size="sm">
+                <Link href={`/admin/events/${event.id}`}>View details</Link>
+              </Button>
             </CardFooter>
           </Card>
         ))}

@@ -6,7 +6,7 @@ import { deleteEvent } from "@/actions/event.actions";
 
 export default function DeleteEvent({ id }: { id: string }) {
   return (
-    <Button onClick={() => deleteEvent(id)} variant="destructive" size="sm">
+    <Button onClick={() => deleteEvent(id)} variant="outline" size="sm">
       Delete
     </Button>
   );
