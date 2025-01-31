@@ -15,15 +15,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { useEffect, useState } from "react";
-import { Event, Stall } from "@prisma/client";
+import { Event } from "@prisma/client";
 import { listAllEvents } from "@/data/event.data";
 import LoadingButton from "../ui/loading-button";
 import { updateStall } from "@/actions/stall.actions";
+import { IStallWithEvent } from "@/types/stall.types";
 
 interface EditStallFormProps {
   navigateTo: string;
   id: string;
-  stall: Stall;
+  stall: IStallWithEvent;
 }
 
 const editStallFormSchema = z.object({
