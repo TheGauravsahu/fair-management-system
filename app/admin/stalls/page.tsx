@@ -1,3 +1,4 @@
+import DeleteStall from "@/components/stalls/deleteStall";
 import SearchStalls from "@/components/stalls/searchStalls";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +21,7 @@ export default async function AdminStall({ searchParams }: AdminStallProps) {
   const { search } = await searchParams;
 
   const stalls = await listAllStalls();
-  
+
   let filteredStalls: Stall[] = stalls;
   if (search) {
     filteredStalls = stalls.filter((stall) =>
@@ -65,6 +66,7 @@ export default async function AdminStall({ searchParams }: AdminStallProps) {
               <Button variant="outline" size="sm">
                 <Link href={`/admin/stalls/${stall.id}/edit`}>Edit</Link>
               </Button>
+              <DeleteStall id={stall.id} />
               <Button variant="outline" size="sm">
                 <Link href={`/admin/stalls/${stall.id}`}>View Details</Link>
               </Button>
