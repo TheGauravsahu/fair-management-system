@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 
 export const addStall = async (values: AddStallFormValues): Promise<Stall> => {
   try {
-    console.log("values---",values)
     const stall = await prisma.stall.create({
       data: values,
     });
