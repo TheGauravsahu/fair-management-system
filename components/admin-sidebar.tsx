@@ -7,14 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {
-  LayoutDashboard,
-  Settings,
-  Ticket,
-  Users,
-  Calendar,
-  Store,
-} from "lucide-react";
+import { LayoutDashboard, Users, Calendar, Store } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 
@@ -23,20 +16,18 @@ export default function AdminSidebar() {
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
     { icon: Users, label: "Users", href: "/admin/users" },
     { icon: Store, label: "Stalls", href: "/admin/stalls" },
-    { icon: Ticket, label: "Tickets", href: "/admin/tickets" },
     { icon: Calendar, label: "Events", href: "/admin/events" },
-    { icon: Settings, label: "Settings", href: "/admin/settings" },
   ];
 
   return (
     <Sidebar>
-      <SidebarHeader className="font-semibold px-4">
+      <SidebarHeader className="font-semibold px-4 mt-4">
         <Link href="/" className="flex items-end gap-1">
           <h1 className="font-bold text-lg md:text-base">Bazaar Hub</h1>
           <Badge className="text-xs">dev</Badge>
         </Link>
       </SidebarHeader>
-      <SidebarContent className="px-4">
+      <SidebarContent className="px-4 mt-4">
         <SidebarMenu>
           {sidebarItems.map((item, index) => (
             <SidebarMenuItem key={index}>

@@ -78,11 +78,15 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
             </CardContent>
             <CardFooter className="flex items-center mt-2 gap-2">
               <Button variant="outline" size="sm">
-                <Link href={`/admin/events/${event.id}/edit`}>Edit</Link>
+                <Link prefetch={true} href={`/admin/events/${event.id}/edit`}>
+                  Edit
+                </Link>
               </Button>
               <DeleteEvent id={event.id} />
               <Button variant="outline" size="sm">
-                <Link href={`/admin/events/${event.id}`}>View details</Link>
+                <Link prefetch={true} href={`/admin/events/${event.id}`}>
+                  View details
+                </Link>
               </Button>
             </CardFooter>
           </Card>
