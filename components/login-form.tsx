@@ -23,7 +23,7 @@ export const loginFormSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-export function LoginForm() {
+export function LoginForm({ redirectTo }: { redirectTo?: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -48,7 +48,7 @@ export function LoginForm() {
       if (res.success) {
         setLoading(false);
         toast.success("Login successful");
-        router.push("/");
+        router.push(`/${redirectTo}` || "/");
       }
       if (!res.success) {
         setLoading(false);

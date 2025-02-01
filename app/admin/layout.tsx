@@ -1,10 +1,8 @@
-import { auth } from "@/auth";
 import AdminSidebar from "@/components/admin-sidebar";
 import AdminNavbar from "@/components/ui/admin-navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Metadata } from "next";
 import React from "react";
-import { redirect } from "next/navigation";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -15,12 +13,7 @@ export const metadata: Metadata = {
   description: "Fair management platform.",
 };
 
-export default async function AdminLayout({ children }: AdminLayoutProps) {
-  const session = await auth();
-
-  if (!session || session.user?.role != "admin") {
-    redirect("/login");
-  }
+export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="w-full">
       <SidebarProvider>
