@@ -61,7 +61,7 @@ export default async function Events({ searchParams }: EventsProps) {
                       Location: {event.location}
                     </p>
                     <p className="text-sm hover:text-primary transition-colors">
-                      Price: ₹{event.price}
+                      Price {"(registering stall)"}: ₹{event.price}
                     </p>
                     <p className="text-sm hover:text-primary transition-colors">
                       Status: {event.status}
@@ -80,9 +80,13 @@ export default async function Events({ searchParams }: EventsProps) {
                         View details
                       </Link>
                     </Button>
+
                     <Button variant="outline" size="sm">
-                      <Link prefetch={true} href={`/events/${event.id}/stalls/add`}>
-                       Register your stall
+                      <Link
+                        prefetch={true}
+                        href={`/events/${event.id}/stalls/add`}
+                      >
+                        Register your stall
                       </Link>
                     </Button>
                   </CardFooter>

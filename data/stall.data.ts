@@ -30,3 +30,27 @@ export const getStallDetails = async (id: string): Promise<IStallWithEvent> => {
     throw error;
   }
 };
+
+export const getUserStalls = async (id: string): Promise<Stall> => {
+  try {
+    const stall = await prisma.stall.findFirstOrThrow({
+      where: {
+        userId: id,
+      },
+    });
+    return stall;
+  } catch (error) {
+    console.log("Failed to get user stalls:", error);
+    throw error;
+  }
+};
+
+export const doesUserHasStalls = async (id: string): Promise<boolean> => {
+  const stalls = await getUserStalls(id);
+
+  if (stalls) {
+    return true;
+  } else {
+    return false;
+  }
+};
