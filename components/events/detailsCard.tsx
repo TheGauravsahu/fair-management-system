@@ -1,11 +1,13 @@
 import { formatDate } from "@/lib/utils";
-import { IEventWithStall } from "@/types/event.types";
+import { IEventWithStalls } from "@/types/event.types";
 import React from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function EventDetailsCard({
   event,
 }: {
-  event: IEventWithStall;
+  event: IEventWithStalls;
 }) {
   return (
     <div className="bg-secondary rounded-2xl shadow-sm border p-8 max-w-4xl mx-auto">
@@ -47,7 +49,7 @@ export default function EventDetailsCard({
       <div className="border-t pt-6">
         <h2 className="text-lg font-medium mb-4">Stalls</h2>
         <div className="grid grid-cols-1 gap-4">
-          {event.stalls.map((stall) => (
+          {event.stalls.slice(0, 3).map((stall) => (
             <div key={stall.id} className="bg-primary/10 rounded-xl p-6">
               <h4 className="font-medium">{stall.name}</h4>
               <p className="text-gray-500 text-sm mt-1">{stall.description}</p>
@@ -58,6 +60,9 @@ export default function EventDetailsCard({
               )}
             </div>
           ))}
+          <Button variant="link">
+            <Link href={`/events/${event.id}/stalls`}>View all stalls</Link>
+          </Button>
         </div>
       </div>
     </div>

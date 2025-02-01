@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { IEventWithStall } from "@/types/event.types";
+import { IEventWithStalls } from "@/types/event.types";
 import { Event } from "@prisma/client";
 
 export const listAllEvents = async (): Promise<Event[]> => {
@@ -28,14 +28,20 @@ export const getEventDetails = async (id: string): Promise<Event> => {
   }
 };
 
-export const getEventWithStallDetails = async (id: string): Promise<IEventWithStall> => {
+export const getEventWithStallDetails = async (
+  id: string
+): Promise<IEventWithStalls> => {
   try {
     const event = await prisma.event.findFirstOrThrow({
       where: {
         id,
       },
       include: {
-        stalls: true,
+        stalls: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
     return event;

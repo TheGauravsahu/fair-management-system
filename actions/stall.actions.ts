@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 
 export const addStall = async (values: AddStallFormValues): Promise<Stall> => {
   try {
-    console.log("--values---", values);
     if (!values || typeof values !== "object") {
       console.error("Invalid stall data provided:", values);
       throw new Error("Invalid stall data provided.");

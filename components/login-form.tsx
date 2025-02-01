@@ -48,7 +48,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
       if (res.success) {
         setLoading(false);
         toast.success("Login successful");
-        router.push(`/${redirectTo}` || "/");
+        router.push(redirectTo ? `/${redirectTo}` : "/");
       }
       if (!res.success) {
         setLoading(false);

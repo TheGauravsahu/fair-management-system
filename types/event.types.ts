@@ -1,5 +1,8 @@
-import { Event, Stall } from "@prisma/client";
+import { Event, Stall, User } from "@prisma/client";
 
-export interface IEventWithStall extends Event {
-  stalls: Stall[];
+interface IStallWithUser extends Stall {
+  user: User
+}
+export interface IEventWithStalls extends Event {
+  stalls: IStallWithUser[];
 }

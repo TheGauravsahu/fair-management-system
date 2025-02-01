@@ -58,14 +58,11 @@ export default function AddStallForm({
 
   async function handleSubmit(values: AddStallFormValues) {
     try {
-      console.log("Submitting stall data:", values);
       setLoading(true);
-
       await addStall(values);
 
       addStallForm.reset();
       setLoading(false);
-
       router.push(navigateTo);
     } catch (error) {
       setLoading(false);
