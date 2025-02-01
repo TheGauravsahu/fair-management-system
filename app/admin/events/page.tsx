@@ -33,7 +33,7 @@ export default async function AdminEvents({ searchParams }: AdminEventsProps) {
   return (
     <div className="p-8">
       <div className="w-full flex items-center justify-center mb-8">
-        <SearchEvents />
+        <SearchEvents actionTo="/admin/events" />
       </div>
 
       <div className="mb-8 mt-8">

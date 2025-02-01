@@ -2,6 +2,7 @@
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function HeroSection() {
   const { resolvedTheme } = useTheme();
@@ -27,7 +28,9 @@ export default function HeroSection() {
             platform.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button className="gap-2">Get started {"->"}</Button>
+            <Button className="gap-2">
+              <Link href="/events">Get started {"->"}</Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -42,7 +45,11 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <img className="rounded-lg object-contain h-full w-full" src={imageSrc} alt="" />
+          <img
+            className="rounded-lg object-contain h-full w-full"
+            src={imageSrc}
+            alt=""
+          />
         </div>
       </div>
     </div>

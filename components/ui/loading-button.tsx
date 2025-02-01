@@ -13,7 +13,7 @@ export default function LoadingButton({
   loadingText,
 }: LoadingButtonProps) {
   return (
-    <Button disabled={loading}>
+    <Button disabled={loading} type="submit">
       {loading ? (
         <span className="flex items-center justify-center gap-1">
           <Loader2 className="animate-spin" /> {loadingText}

@@ -1,12 +1,5 @@
-import { Event } from "@prisma/client";
+import { Event, Stall } from "@prisma/client";
 
-export interface IStallWithEvent {
-  id: string;
-  name: string;
-  description: string;
-  location?: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  eventId: string;
+export interface IStallWithEvent extends Stall {
   event: Event;
 }

@@ -8,9 +8,24 @@ import { revalidatePath } from "next/cache";
 
 export const addStall = async (values: AddStallFormValues): Promise<Stall> => {
   try {
+    console.log("--values---", values);
+    if (!values || typeof values !== "object") {
+      console.error("Invalid stall data provided:", values);
+      throw new Error("Invalid stall data provided.");
+    }
+
     const stall = await prisma.stall.create({
-      data: values,
+      data: {
+        name: values.name,
+        description: values.description,
+        location: values.location || null, // Ensure null instead of undefined
+        userId: values.userId,
+        eventId: values.eventId,
+      },
     });
+
+    revalidatePath("/events/stalls");
+    revalidatePath("/admin/stalls");
     return stall;
   } catch (error) {
     console.log("Error adding stall:", error);
@@ -23,6 +38,9 @@ export const updateStall = async (
   id: string
 ): Promise<Stall> => {
   try {
+    if (!values || typeof values !== "object") {
+      throw new Error("Invalid stall data provided.");
+    }
     const stall = await prisma.stall.update({
       where: {
         id,

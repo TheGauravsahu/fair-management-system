@@ -33,9 +33,13 @@ export type AddStallFormValues = z.infer<typeof addStallFormSchema>;
 export default function AddStallForm({
   navigateTo,
   users,
+  eventId,
+  userId,
 }: {
   navigateTo: string;
   users?: User[];
+  eventId?: string;
+  userId?: string;
 }) {
   const [loading, setLoading] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
@@ -47,27 +51,21 @@ export default function AddStallForm({
       name: "",
       description: "",
       location: "",
-      eventId: "",
-      userId: "",
+      eventId: eventId ?? "",
+      userId: userId ?? "",
     },
   });
 
-  // fetching events
-  useEffect(() => {
-    const getEvents = async () => {
-      const eventsData = await listAllEvents();
-      setEvents(eventsData);
-    };
-
-    getEvents();
-  }, []);
-
   async function handleSubmit(values: AddStallFormValues) {
     try {
+      console.log("Submitting stall data:", values);
       setLoading(true);
+
       await addStall(values);
+
       addStallForm.reset();
       setLoading(false);
+
       router.push(navigateTo);
     } catch (error) {
       setLoading(false);
@@ -78,6 +76,16 @@ export default function AddStallForm({
 
   const pathname = usePathname();
   const isAdminAddingStall = pathname === "/admin/stalls/add";
+
+  // fetching events
+  useEffect(() => {
+    const getEvents = async () => {
+      const eventsData = await listAllEvents();
+      setEvents(eventsData);
+    };
+
+    getEvents();
+  }, [addStallForm, eventId, userId, isAdminAddingStall]);
 
   return (
     <Form {...addStallForm}>
@@ -130,28 +138,30 @@ export default function AddStallForm({
           )}
         />
 
-        {/* event */}
-        <FormField
-          control={addStallForm.control}
-          name="eventId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Event</FormLabel>
-              <FormControl>
-                <select {...field} className="w-full p-2 border rounded">
-                  {events.map((event) => (
-                    <option key={event.id} value={event.id}>
-                      {event.name}
-                    </option>
-                  ))}
-                </select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* events list (admin only) */}
+        {isAdminAddingStall && (
+          <FormField
+            control={addStallForm.control}
+            name="eventId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Event</FormLabel>
+                <FormControl>
+                  <select {...field} className="w-full p-2 border rounded">
+                    {events.map((event) => (
+                      <option key={event.id} value={event.id}>
+                        {event.name}
+                      </option>
+                    ))}
+                  </select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
-        {/* user's list (admin only) */}
+        {/* users list (admin only) */}
         {isAdminAddingStall && (
           <FormField
             control={addStallForm.control}

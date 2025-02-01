@@ -22,10 +22,6 @@ export async function NavBar({ className }: NavBarProps) {
       url: "/events",
     },
     {
-      name: "Vendors",
-      url: "/vendors",
-    },
-    {
       name: "About",
       url: "/about",
     },
@@ -61,6 +57,18 @@ export async function NavBar({ className }: NavBarProps) {
               </Link>
             );
           })}
+
+          {session?.user.role === "admin" && (
+            <Link
+              href="/admin"
+              className={cn(
+                "relative cursor-pointer text-xs md:text-sm px-2 md:px-4 py-2 rounded-full transition-colors",
+                "text-foreground/60 hover:text-primary"
+              )}
+            >
+              <span className="hidden md:inline">Admin</span>
+            </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-1">
